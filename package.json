@@ -19,19 +19,9 @@
     "commit": "git-cz"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts,tsx}": [
       "prettier --single-quote --no-semi --trailing-comma all --write",
       "eslint --fix",
-      "git add"
-    ],
-    "*.ts": [
-      "prettier --single-quote --no-semi --trailing-comma all --write",
-      "tslint --fix",
-      "git add"
-    ],
-    "*.tsx": [
-      "prettier --single-quote --no-semi --trailing-comma all --write",
-      "tslint --fix",
       "git add"
     ],
     "*.graphql": [
