@@ -1,0 +1,30 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <JSCodeStyleSettings>
+      <option name="USE_SEMICOLON_AFTER_STATEMENT" value="false" />
+      <option name="USE_DOUBLE_QUOTES" value="false" />
+    </JSCodeStyleSettings>
+    <TypeScriptCodeStyleSettings>
+      <option name="USE_SEMICOLON_AFTER_STATEMENT" value="false" />
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+      <option name="USE_DOUBLE_QUOTES" value="false" />
+      <option name="SPACES_WITHIN_IMPORTS" value="true" />
+    </TypeScriptCodeStyleSettings>
+    <codeStyleSettings language="TypeScript">
+      <indentOptions>
+        <option name="INDENT_SIZE" value="2" />
+        <option name="CONTINUATION_INDENT_SIZE" value="2" />
+        <option name="TAB_SIZE" value="2" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="ruby">
+      <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
+      <option name="SPACE_WITHIN_BRACES" value="true" />
+      <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACES" value="true" />
+      <indentOptions>
+        <option name="CONTINUATION_INDENT_SIZE" value="2" />
+        <option name="USE_RELATIVE_INDENTS" value="false" />
+      </indentOptions>
+    </codeStyleSettings>
+  </code_scheme>
+</component>
