@@ -33,13 +33,12 @@
 
 * {
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-smoothing: antialiased; }
 
 html, body {
   overflow-x: hidden;
-  font-family: "Roboto";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  font-family: "Roboto"; }
 
 a {
   text-decoration: none; }
@@ -119,7 +118,7 @@ select {
 .input {
   width: 100%;
   border: 1px solid #ddd;
-  font-family: 'Roboto'; }
+  font-family: "Roboto"; }
 
 .search {
   padding: 10px 10px 10px 35px; }
