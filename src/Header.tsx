@@ -1,17 +1,27 @@
 import * as React from 'react'
 import compose from 'recompose/compose'
-
-import logo from '@/static/images/logo.png'
+import styled from 'styled-components'
 
 import './Header.css'
+import HeaderBanner from '@/HeaderBanner'
+import HeaderNavSubMenu from '@/HeaderNavSubMenu'
+import { withHandlers, withState } from 'recompose'
 
 // component
-export const HeaderComponent = (): JSX.Element => {
+export const renderHeaderNavSubMenu = (
+  showHeaderNavSubMenu: boolean,
+): JSX.Element | null => {
+  return showHeaderNavSubMenu ? <HeaderNavSubMenu /> : null
+}
+
+export const HeaderComponent = (props: any): JSX.Element => {
+  const { toggleHeaderNavSubMenu, showHeaderNavSubMenu } = props
+
   return (
-    <header>
+    <StyledHeader>
       <nav>
-        <div className="nav-bar">
-          <ul className="nav-bar-account-info">
+        <NavBar>
+          <NavBarAccount>
             <li>
               <a href="#">
                 <i className="fa fa-user-circle" aria-hidden="true" />
@@ -21,104 +31,20 @@ export const HeaderComponent = (): JSX.Element => {
             <li>
               <a href="#">Help</a>
             </li>
-          </ul>
-        </div>
+          </NavBarAccount>
+        </NavBar>
 
-        <div className="nav-menu">
+        <NavMenu>
           <div className="container">
             <div className="logo" />
 
             <ul className="nav-menu-list">
-              <li className="nav-menu-list-item men">
+              <li
+                className="nav-menu-list-item men"
+                onMouseEnter={toggleHeaderNavSubMenu}
+              >
                 <a href="#">men</a>
-                <div className="nav-menu-sub">
-                  <div className="nav-menu-sub-container">
-                    <div className="nav-menu-sub-content">
-                      <div className="nav-menu-sub-column">
-                        <a href="#" className="nav-menu-sub-column-heading">
-                          BY SPORT
-                        </a>
-                        <ul>
-                          <li>
-                            <a href="#">Lifestyle</a>
-                          </li>
-                          <li>
-                            <a href="#">Running</a>
-                          </li>
-                          <li>
-                            <a href="#">Basketball</a>
-                          </li>
-                          <li>
-                            <a href="#">Soccer</a>
-                          </li>
-                          <li>
-                            <a href="#">Training</a>
-                          </li>
-                          <li>
-                            <a href="#">Skateboarding</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div className="nav-menu-sub-column">
-                        <a href="#" className="nav-menu-sub-column-heading">
-                          F1iD
-                        </a>
-                        <ul>
-                          <li>
-                            <a href="#">Mens</a>
-                          </li>
-                          <li>
-                            <a href="#">Womens</a>
-                          </li>
-                          <li>
-                            <a href="#">Boys</a>
-                          </li>
-                          <li>
-                            <a href="#">Girls</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div className="nav-menu-sub-column">
-                        <a href="#" className="nav-menu-sub-column-heading">
-                          BY COLLECTION
-                        </a>
-                        <ul>
-                          <li>
-                            <a href="#">Classic Chuck Taylor</a>
-                          </li>
-                          <li>
-                            <a href="#">One Star</a>
-                          </li>
-                          <li>
-                            <a href="#">Converse Chuck 70</a>
-                          </li>
-                          <li>
-                            <a href="#">Premium Leather</a>
-                          </li>
-                          <li>
-                            <a href="#">Counter Climate</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div className="nav-menu-sub-column">
-                        <a href="#" className="nav-menu-sub-column-heading">
-                          SALE
-                        </a>
-                        <div>
-                          <a
-                            href="#"
-                            className="nav-menu-sub-column-img-wrapper"
-                          >
-                            <img src={logo} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {renderHeaderNavSubMenu(showHeaderNavSubMenu)}
               </li>
               <li>
                 <a href="#">women</a>
@@ -133,7 +59,7 @@ export const HeaderComponent = (): JSX.Element => {
                 <a href="#">customize</a>
               </li>
             </ul>
-            <div className="search-wrapper">
+            <SearchWrapper>
               <i className="fa fa-search" aria-hidden="true" />
               <form>
                 <input
@@ -144,32 +70,26 @@ export const HeaderComponent = (): JSX.Element => {
                 />
                 <input type="submit" value="submit" />
               </form>
-            </div>
+            </SearchWrapper>
           </div>
-        </div>
+        </NavMenu>
       </nav>
 
-      <div className="banner">
-        <div className="banner-container">
-          <div className="arrow arrow-let">
-            <i className="fa fa-angle-left" aria-hidden="true" />
-          </div>
-          <div className="banner-content">
-            <p>
-              Shoes, Clothes on Big Sale! <a href="#">Check it out</a>
-            </p>
-          </div>
-          <div className="arrow arrow-right">
-            <i className="fa fa-angle-right" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
-    </header>
+      <HeaderBanner title={'Shoes, Clothes on Big Sale! '} />
+    </StyledHeader>
   )
 }
 
 // class
-export const enhance = compose<any, any>()
+export const enhance = compose<any, any>(
+  withState('showHeaderNavSubMenu', 'updateHeaderNavSubMenu', false),
+  withHandlers({
+    toggleHeaderNavSubMenu: ({ updateHeaderNavSubMenu }) => () =>
+      updateHeaderNavSubMenu(
+        (showHeaderNavSubMenu: boolean): boolean => !showHeaderNavSubMenu,
+      ),
+  }),
+)
 export const HeaderComponentEnhanced = enhance(HeaderComponent)
 export default class Header extends React.Component<any, any> {
   constructor(props: any) {
@@ -180,3 +100,115 @@ export default class Header extends React.Component<any, any> {
     return <HeaderComponentEnhanced {...this.props} />
   }
 }
+
+// styles
+const StyledHeader = styled.header`
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+`
+
+const NavBar = styled.div`
+  display: flex;
+  flex-flow: row-reverse;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: 'Oswald', sans-serif;
+  background: #fff;
+`
+
+const NavBarAccount = styled.ul`
+  display: flex;
+
+  > li {
+    padding: 0 10px;
+  }
+
+  > li > a {
+    font-size: 1.2rem;
+    color: #8d8d8d;
+    display: inline-block;
+
+    > i {
+      font-size: 1.6rem;
+      vertical-align: middle;
+      margin-right: 2px;
+    }
+  }
+`
+
+const NavMenu = styled.div`
+  width: 100%;
+  height: 70px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+
+  > .container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 60% 1fr;
+  }
+
+  .nav-menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > li {
+      padding: 0 10px;
+
+      > a {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        color: #2f2f2f;
+        line-height: 1.5;
+      }
+
+      > a:after {
+        content: '';
+        display: block;
+        visibility: hidden;
+        width: 100%;
+        height: 1px;
+        margin-top: 2px;
+        background: #2f2f2f;
+      }
+    }
+
+    .nav-menu-list-item.on {
+      .nav-menu-sub {
+        display: block;
+      }
+
+      > a:after {
+        visibility: visible;
+      }
+    }
+  }
+`
+
+const SearchWrapper = styled.div`
+  position: relative;
+
+  > i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    margin-top: -8px;
+    font-size: 1.6rem;
+  }
+
+  .search {
+    font-size: 1.6rem;
+  }
+
+  input[type='submit'] {
+    display: none;
+  }
+`
