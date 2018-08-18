@@ -95,10 +95,6 @@ export const HeaderNavSubMenu = (): JSX.Element => {
   )
 }
 
-// class
-export const enhance = compose<any, any>()
-export default enhance(HeaderNavSubMenu)
-
 // style
 const StyledHeaderNavSubMenu = styled.div`
   display: block;
@@ -167,3 +163,7 @@ const StyledHeaderNavSubMenu = styled.div`
     }
   }
 `
+
+// class
+export const enhance = compose<any, any>()
+export default enhance(HeaderNavSubMenu)

@@ -2,10 +2,10 @@ import * as React from 'react'
 import compose from 'recompose/compose'
 import styled from 'styled-components'
 
-import './Header.css'
 import HeaderBanner from '@/HeaderBanner'
 import HeaderNavSubMenu from '@/HeaderNavSubMenu'
 import { withHandlers, withState } from 'recompose'
+import logo from '@/static/images/logo.svg'
 
 // component
 export const renderHeaderNavSubMenu = (
@@ -15,7 +15,11 @@ export const renderHeaderNavSubMenu = (
 }
 
 export const HeaderComponent = (props: any): JSX.Element => {
-  const { toggleHeaderNavSubMenu, showHeaderNavSubMenu } = props
+  const {
+    toggleHeaderNavSubMenu,
+    showHeaderNavSubMenu,
+    toggleIsFocusedOnSearch,
+  } = props
 
   return (
     <StyledHeader>
@@ -36,12 +40,15 @@ export const HeaderComponent = (props: any): JSX.Element => {
 
         <NavMenu>
           <div className="container">
-            <div className="logo" />
+            <Logo>
+              <img src={logo} width={50} height={50} />
+            </Logo>
 
             <ul className="nav-menu-list">
               <li
                 className="nav-menu-list-item men"
                 onMouseEnter={toggleHeaderNavSubMenu}
+                onMouseLeave={toggleHeaderNavSubMenu}
               >
                 <a href="#">men</a>
                 {renderHeaderNavSubMenu(showHeaderNavSubMenu)}
@@ -59,14 +66,15 @@ export const HeaderComponent = (props: any): JSX.Element => {
                 <a href="#">customize</a>
               </li>
             </ul>
-            <SearchWrapper>
-              <i className="fa fa-search" aria-hidden="true" />
-              <form>
+            <SearchWrapper {...props}>
+              <form role="search">
+                <i className="fa fa-search" aria-hidden="true" />
                 <input
                   type="search"
                   className="input search"
-                  value=""
                   placeholder="Search for"
+                  onFocus={toggleIsFocusedOnSearch}
+                  onBlur={toggleIsFocusedOnSearch}
                 />
                 <input type="submit" value="submit" />
               </form>
@@ -83,10 +91,15 @@ export const HeaderComponent = (props: any): JSX.Element => {
 // class
 export const enhance = compose<any, any>(
   withState('showHeaderNavSubMenu', 'updateHeaderNavSubMenu', false),
+  withState('isFocusedOnSearch', 'updateIsFocusedOnSearch', false),
   withHandlers({
     toggleHeaderNavSubMenu: ({ updateHeaderNavSubMenu }) => () =>
       updateHeaderNavSubMenu(
         (showHeaderNavSubMenu: boolean): boolean => !showHeaderNavSubMenu,
+      ),
+    toggleIsFocusedOnSearch: ({ updateIsFocusedOnSearch }) => () =>
+      updateIsFocusedOnSearch(
+        (isFocusedOnSearch: boolean): boolean => !isFocusedOnSearch,
       ),
   }),
 )
@@ -144,7 +157,6 @@ const NavBarAccount = styled.ul`
 const NavMenu = styled.div`
   width: 100%;
   height: 70px;
-  padding: 15px 0;
   border-bottom: 1px solid #e5e5e5;
   background: #fff;
 
@@ -160,7 +172,10 @@ const NavMenu = styled.div`
     align-items: center;
 
     > li {
-      padding: 0 10px;
+      padding: 15px 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
 
       > a {
         font-family: 'Oswald', sans-serif;
@@ -168,6 +183,7 @@ const NavMenu = styled.div`
         text-transform: uppercase;
         color: #2f2f2f;
         line-height: 1.5;
+        font-weight: 600;
       }
 
       > a:after {
@@ -194,21 +210,38 @@ const NavMenu = styled.div`
 `
 
 const SearchWrapper = styled.div`
-  position: relative;
+  padding: 15px 0;
+  display: flex;
+  justify-content: flex-end;
 
-  > i {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    margin-top: -8px;
-    font-size: 1.6rem;
+  > form {
+    width: ${(props: any) => (props.isFocusedOnSearch ? '230px' : '190px')};
+    position: relative;
+    transition: width 0.25s;
+
+    > i {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      margin-top: -8px;
+      font-size: 1.6rem;
+    }
   }
 
   .search {
     font-size: 1.6rem;
+    transition: border 0.25s;
+    border: ${(props: any) =>
+      props.isFocusedOnSearch ? '1px solid #2F2F2F' : '1px solid #ddd'};
   }
 
   input[type='submit'] {
     display: none;
   }
+`
+
+const Logo = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `
