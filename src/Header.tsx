@@ -7,13 +7,13 @@ import HeaderNavSubMenu from '@/HeaderNavSubMenu'
 import { withHandlers, withState } from 'recompose'
 import logo from '@/static/images/logo.svg'
 
-// component
 export const renderHeaderNavSubMenu = (
   showHeaderNavSubMenu: boolean,
 ): JSX.Element | null => {
   return showHeaderNavSubMenu ? <HeaderNavSubMenu /> : null
 }
 
+// component
 export const HeaderComponent = (props: any): JSX.Element => {
   const {
     toggleHeaderNavSubMenu,
