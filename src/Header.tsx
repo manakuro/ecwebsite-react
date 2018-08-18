@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import HeaderBanner from '@/HeaderBanner'
 import HeaderNavSubMenu from '@/HeaderNavSubMenu'
-import { withHandlers, withState } from 'recompose'
+import { StateHandler, StateHandlerMap, withStateHandlers } from 'recompose'
 import logo from '@/static/images/logo.svg'
 
 export const renderHeaderNavSubMenu = (
@@ -14,7 +14,7 @@ export const renderHeaderNavSubMenu = (
 }
 
 // component
-export const HeaderComponent = (props: any): JSX.Element => {
+export const HeaderComponent = (props: Props): JSX.Element => {
   const {
     toggleHeaderNavSubMenu,
     showHeaderNavSubMenu,
@@ -47,8 +47,9 @@ export const HeaderComponent = (props: any): JSX.Element => {
             <ul className="nav-menu-list">
               <li
                 className="nav-menu-list-item men"
-                onMouseEnter={toggleHeaderNavSubMenu}
-                onMouseLeave={toggleHeaderNavSubMenu}
+                // tslint:disable jsx-no-lambda
+                onMouseEnter={() => toggleHeaderNavSubMenu(true)}
+                onMouseLeave={() => toggleHeaderNavSubMenu(false)}
               >
                 <a href="#">men</a>
                 {renderHeaderNavSubMenu(showHeaderNavSubMenu)}
@@ -73,8 +74,8 @@ export const HeaderComponent = (props: any): JSX.Element => {
                   type="search"
                   className="input search"
                   placeholder="Search for"
-                  onFocus={toggleIsFocusedOnSearch}
-                  onBlur={toggleIsFocusedOnSearch}
+                  onFocus={() => toggleIsFocusedOnSearch(true)}
+                  onBlur={() => toggleIsFocusedOnSearch(false)}
                 />
                 <input type="submit" value="submit" />
               </form>
@@ -82,35 +83,42 @@ export const HeaderComponent = (props: any): JSX.Element => {
           </div>
         </NavMenu>
       </nav>
-
       <HeaderBanner title={'Shoes, Clothes on Big Sale! '} />
     </StyledHeader>
   )
 }
 
 // class
-export const enhance = compose<any, any>(
-  withState('showHeaderNavSubMenu', 'updateHeaderNavSubMenu', false),
-  withState('isFocusedOnSearch', 'updateIsFocusedOnSearch', false),
-  withHandlers({
-    toggleHeaderNavSubMenu: ({ updateHeaderNavSubMenu }) => () =>
-      updateHeaderNavSubMenu(
-        (showHeaderNavSubMenu: boolean): boolean => !showHeaderNavSubMenu,
-      ),
-    toggleIsFocusedOnSearch: ({ updateIsFocusedOnSearch }) => () =>
-      updateIsFocusedOnSearch(
-        (isFocusedOnSearch: boolean): boolean => !isFocusedOnSearch,
-      ),
-  }),
-)
-export const HeaderComponentEnhanced = enhance(HeaderComponent)
-export default class Header extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props)
-  }
+type State = showHeaderNavSubMenuState & isFocusedOnSearchState
+type showHeaderNavSubMenuState = {
+  showHeaderNavSubMenu: boolean
+}
+type isFocusedOnSearchState = {
+  isFocusedOnSearch: boolean
+}
 
+interface Updaters extends StateHandlerMap<State> {
+  toggleHeaderNavSubMenu: StateHandler<showHeaderNavSubMenuState>
+  toggleIsFocusedOnSearch: StateHandler<isFocusedOnSearchState>
+}
+
+type Props = State & Updaters
+
+export const HeaderComponentEnhanced = compose<Props, {}>(
+  withStateHandlers(() => ({ showHeaderNavSubMenu: false }), {
+    toggleHeaderNavSubMenu: () => (value: boolean) => ({
+      showHeaderNavSubMenu: value,
+    }),
+  }),
+  withStateHandlers(() => ({ isFocusedOnSearch: false }), {
+    toggleIsFocusedOnSearch: () => (value: boolean) => ({
+      isFocusedOnSearch: value,
+    }),
+  }),
+)(HeaderComponent)
+export default class Header extends React.Component<{}, {}> {
   public render() {
-    return <HeaderComponentEnhanced {...this.props} />
+    return <HeaderComponentEnhanced />
   }
 }
 
