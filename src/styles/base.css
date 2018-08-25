@@ -97,11 +97,6 @@ select {
 /* -----------------------
  Form
 ----------------------- */
-.input {
-  width: 100%;
-  border: 1px solid #ddd;
-  font-family: "Roboto"; }
-
 .search {
   padding: 10px 10px 10px 35px; }
 

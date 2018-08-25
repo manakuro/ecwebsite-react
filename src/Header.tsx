@@ -6,6 +6,8 @@ import HeaderBanner from '@/HeaderBanner'
 import HeaderNavSubMenu from '@/HeaderNavSubMenu'
 import { StateHandler, StateHandlerMap, withStateHandlers } from 'recompose'
 import logo from '@/static/images/logo.svg'
+import Img from '@/components/atoms/Img'
+import SearchBox from '@/components/molecules/SearchBox'
 
 export const renderHeaderNavSubMenu = (
   showHeaderNavSubMenu: boolean,
@@ -14,12 +16,8 @@ export const renderHeaderNavSubMenu = (
 }
 
 // component
-export const HeaderComponent = (props: Props): JSX.Element => {
-  const {
-    toggleHeaderNavSubMenu,
-    showHeaderNavSubMenu,
-    toggleIsFocusedOnSearch,
-  } = props
+export const HeaderComponent = (props: HeaderProps): JSX.Element => {
+  const { toggleHeaderNavSubMenu, showHeaderNavSubMenu } = props
 
   return (
     <StyledHeader>
@@ -41,7 +39,7 @@ export const HeaderComponent = (props: Props): JSX.Element => {
         <NavMenu>
           <div className="container">
             <Logo>
-              <img src={logo} width={50} height={50} />
+              <Img src={logo} width={50} height={50} />
             </Logo>
 
             <ul className="nav-menu-list">
@@ -67,19 +65,9 @@ export const HeaderComponent = (props: Props): JSX.Element => {
                 <a href="#">customize</a>
               </li>
             </ul>
-            <SearchWrapper {...props}>
-              <form role="search">
-                <i className="fa fa-search" aria-hidden="true" />
-                <input
-                  type="search"
-                  className="input search"
-                  placeholder="Search for"
-                  onFocus={() => toggleIsFocusedOnSearch(true)}
-                  onBlur={() => toggleIsFocusedOnSearch(false)}
-                />
-                <input type="submit" value="submit" />
-              </form>
-            </SearchWrapper>
+            <SearchBoxWrapper>
+              <SearchBox />
+            </SearchBoxWrapper>
           </div>
         </NavMenu>
       </nav>
@@ -89,38 +77,23 @@ export const HeaderComponent = (props: Props): JSX.Element => {
 }
 
 // class
-type State = showHeaderNavSubMenuState & isFocusedOnSearchState
-type showHeaderNavSubMenuState = {
+type HeaderState = {
   showHeaderNavSubMenu: boolean
 }
-type isFocusedOnSearchState = {
-  isFocusedOnSearch: boolean
+
+interface HeaderUpdaters extends StateHandlerMap<HeaderState> {
+  toggleHeaderNavSubMenu: StateHandler<HeaderState>
 }
 
-interface Updaters extends StateHandlerMap<State> {
-  toggleHeaderNavSubMenu: StateHandler<showHeaderNavSubMenuState>
-  toggleIsFocusedOnSearch: StateHandler<isFocusedOnSearchState>
-}
+type HeaderProps = HeaderState & HeaderUpdaters
 
-type Props = State & Updaters
-
-export const HeaderComponentEnhanced = compose<Props, {}>(
+export default compose<HeaderProps, {}>(
   withStateHandlers(() => ({ showHeaderNavSubMenu: false }), {
     toggleHeaderNavSubMenu: () => (value: boolean) => ({
       showHeaderNavSubMenu: value,
     }),
   }),
-  withStateHandlers(() => ({ isFocusedOnSearch: false }), {
-    toggleIsFocusedOnSearch: () => (value: boolean) => ({
-      isFocusedOnSearch: value,
-    }),
-  }),
 )(HeaderComponent)
-export default class Header extends React.Component<{}, {}> {
-  public render() {
-    return <HeaderComponentEnhanced />
-  }
-}
 
 // styles
 const StyledHeader = styled.header`
@@ -217,35 +190,10 @@ const NavMenu = styled.div`
   }
 `
 
-const SearchWrapper = styled.div`
+const SearchBoxWrapper = styled.div`
   padding: 15px 0;
   display: flex;
   justify-content: flex-end;
-
-  > form {
-    width: ${(props: any) => (props.isFocusedOnSearch ? '230px' : '190px')};
-    position: relative;
-    transition: width 0.25s;
-
-    > i {
-      position: absolute;
-      top: 50%;
-      left: 12px;
-      margin-top: -8px;
-      font-size: 1.6rem;
-    }
-  }
-
-  .search {
-    font-size: 1.6rem;
-    transition: border 0.25s;
-    border: ${(props: any) =>
-      props.isFocusedOnSearch ? '1px solid #2F2F2F' : '1px solid #ddd'};
-  }
-
-  input[type='submit'] {
-    display: none;
-  }
 `
 
 const Logo = styled.div`
