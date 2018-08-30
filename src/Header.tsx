@@ -8,11 +8,16 @@ import { StateHandler, StateHandlerMap, withStateHandlers } from 'recompose'
 import logo from '@/static/images/logo.svg'
 import Img from '@/components/atoms/Img'
 import SearchBox from '@/components/molecules/SearchBox'
+import transition from 'styled-transition-group'
 
 export const renderHeaderNavSubMenu = (
   showHeaderNavSubMenu: boolean,
 ): JSX.Element | null => {
-  return showHeaderNavSubMenu ? <HeaderNavSubMenu /> : null
+  return showHeaderNavSubMenu ? (
+    <Fade in={true} appear={true}>
+      <HeaderNavSubMenu />
+    </Fade>
+  ) : null
 }
 
 // component
@@ -50,7 +55,9 @@ export const HeaderComponent = (props: HeaderProps): JSX.Element => {
                 onMouseLeave={() => toggleHeaderNavSubMenu(false)}
               >
                 <a href="#">men</a>
-                {renderHeaderNavSubMenu(showHeaderNavSubMenu)}
+                <Fade in={showHeaderNavSubMenu}>
+                  <HeaderNavSubMenu />
+                </Fade>
               </li>
               <li>
                 <a href="#">women</a>
@@ -200,4 +207,21 @@ const Logo = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+`
+
+const Fade = transition.div.attrs({
+  unmountOnExit: true,
+  timeout: 250,
+})`
+  &:enter { opacity: 0; }
+  &:enter-active {
+    opacity: 1;
+    transition: opacity .5s ease;
+  }
+
+  &:exit { opacity: 1; }
+  &:exit-active {
+    opacity: 0;
+    transition: opacity .5s ease;
+  }
 `
