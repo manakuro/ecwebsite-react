@@ -5,6 +5,7 @@ const StyledFade = transition.div.attrs({
   unmountOnExit: true,
   timeout: 250,
 })`
+  z-index: 1000;
   &:enter { opacity: 0; }
   &:enter-active {
     opacity: 1;

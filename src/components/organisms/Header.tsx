@@ -7,6 +7,7 @@ import logo from '@/static/images/logo.svg'
 import Img from '@/components/atoms/Img'
 import SearchBox from '@/components/molecules/SearchBox'
 import NavMenu from '@/components/molecules/NavMenu'
+import NavBarAccount from '@/components/molecules/NavBarAccount'
 
 // component
 export const HeaderComponent = (props: HeaderProps): JSX.Element => {
@@ -14,19 +15,8 @@ export const HeaderComponent = (props: HeaderProps): JSX.Element => {
     <StyledHeader>
       <div>
         <NavBar>
-          <NavBarAccount>
-            <li>
-              <a href="#">
-                <i className="fa fa-user-circle" aria-hidden="true" />
-                <span>My Account</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">Help</a>
-            </li>
-          </NavBarAccount>
+          <NavBarAccount />
         </NavBar>
-
         <Nav>
           <div className="container">
             <Logo>
@@ -64,31 +54,9 @@ const NavBar = styled.div`
   flex-flow: row-reverse;
   align-items: center;
   width: 100%;
-  height: 40px;
   border-bottom: 1px solid #e5e5e5;
   font-family: 'Oswald', sans-serif;
   background: #fff;
-`
-
-const NavBarAccount = styled.ul`
-  display: flex;
-
-  > li {
-    padding: 0 10px;
-  }
-
-  > li > a {
-    font-size: 1.2rem;
-    color: #8d8d8d;
-    display: flex;
-    align-items: center;
-
-    > i {
-      font-size: 1.6rem;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-  }
 `
 
 const Nav = styled.div`

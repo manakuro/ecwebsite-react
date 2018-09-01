@@ -140,13 +140,14 @@ const StyledHeaderNavSubMenu = styled.div`
     }
 
     > ul > li {
-      margin-bottom: 7px;
+      margin-bottom: 5px;
     }
 
     > ul > li > a {
       color: inherit;
       font-size: 1.4rem;
       transition: opacity 0.25s;
+      line-height: 1.5;
 
       &:hover {
         opacity: 0.5;
@@ -164,6 +165,4 @@ const StyledHeaderNavSubMenu = styled.div`
   }
 `
 
-// class
-export const enhance = compose<any, any>()
-export default enhance(HeaderNavSubMenu)
+export default compose<any, any>()(HeaderNavSubMenu)

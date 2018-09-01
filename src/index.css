@@ -42,7 +42,8 @@ html, body {
   font-size: 62.5%; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  cursor: pointer; }
 
 p {
   margin: 0; }
