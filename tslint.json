@@ -19,6 +19,13 @@
     "no-consecutive-blank-lines": false,
     "semicolon": [true, "never"],
     "interface-over-type-literal": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": false
+      }
+    ]
   }
 }

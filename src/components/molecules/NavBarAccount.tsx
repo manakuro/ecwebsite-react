@@ -8,6 +8,7 @@ import {
   withHandlers,
 } from 'recompose'
 import Fade from '@/components/atoms/Fade'
+import DropdownMenu from '@/components/atoms/DropdownMenu'
 
 export const NavBarAccountComponent = (
   props: NavBarAccountProps,
@@ -33,40 +34,38 @@ export const NavBarAccountComponent = (
             in={showMenu('help')}
             exitActiveTransition="opacity .5s ease .5s;"
           >
-            <DropDownMenu>
-              <DropDownMenuContainer>
-                <HelpList>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">Order Status</HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">
-                      Ships and Delivery
-                    </HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">Returns</HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">Contact Us</HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">Privacy Policy</HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">
-                      Terms & Conditions
-                    </HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">Site Feedback</HelpListItemLink>
-                  </HelpListItem>
-                  <HelpListItem>
-                    <HelpListItemLink href="#">View All</HelpListItemLink>
-                  </HelpListItem>
-                </HelpList>
-              </DropDownMenuContainer>
-            </DropDownMenu>
+            <DropdownMenu>
+              <HelpList>
+                <HelpListItem>
+                  <HelpListItemLink href="#">Order Status</HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">
+                    Ships and Delivery
+                  </HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">Returns</HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">Contact Us</HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">Privacy Policy</HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">
+                    Terms & Conditions
+                  </HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">Site Feedback</HelpListItemLink>
+                </HelpListItem>
+                <HelpListItem>
+                  <HelpListItemLink href="#">View All</HelpListItemLink>
+                </HelpListItem>
+              </HelpList>
+            </DropdownMenu>
           </Fade>
         </NavBarAccountLink>
       </li>
@@ -127,24 +126,6 @@ const NavBarAccountLink = styled<NavBarAccountLinkProps, any>('a')`
     vertical-align: middle;
     margin-right: 5px;
   }
-`
-
-const DropDownMenu = styled.div`
-  position: absolute;
-  top: 100%;
-  right: 50%;
-  margin-top: 2px;
-  z-index: 1000;
-`
-const DropDownMenuContainer = styled.div`
-  position: relative;
-  right: -50%;
-
-  background-color: white;
-  border: 1px solid #e5e5e5;
-  border-top: none;
-  padding: 24px;
-  white-space: nowrap;
 `
 
 const HelpList = styled.ul``
