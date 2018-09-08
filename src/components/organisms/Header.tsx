@@ -9,6 +9,7 @@ import SearchBox from '@/components/molecules/SearchBox'
 import NavMenu from '@/components/molecules/NavMenu'
 import NavBarAccount from '@/components/molecules/NavBarAccount'
 
+
 // component
 export const HeaderComponent = (props: HeaderProps): JSX.Element => {
   return (
@@ -20,7 +21,11 @@ export const HeaderComponent = (props: HeaderProps): JSX.Element => {
         <Nav>
           <NavContainer>
             <Logo>
-              <Img src={logo} width={50} height={50} />
+              <Img
+                src={logo}
+                width={50}
+                height={50}
+              />
             </Logo>
             <NavMenu />
             <SearchBoxWrapper>
