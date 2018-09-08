@@ -18,7 +18,7 @@ export const HeaderComponent = (props: HeaderProps): JSX.Element => {
           <NavBarAccount />
         </NavBar>
         <Nav>
-          <div className="container">
+          <NavContainer>
             <Logo>
               <Img src={logo} width={50} height={50} />
             </Logo>
@@ -26,7 +26,7 @@ export const HeaderComponent = (props: HeaderProps): JSX.Element => {
             <SearchBoxWrapper>
               <SearchBox />
             </SearchBoxWrapper>
-          </div>
+          </NavContainer>
         </Nav>
       </div>
       <HeaderBanner title={'Shoes, Clothes on Big Sale! '} />
@@ -64,13 +64,19 @@ const Nav = styled.div`
   height: 70px;
   border-bottom: 1px solid #e5e5e5;
   background: #fff;
-
-  > .container {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 60% 1fr;
-  }
 `
+
+const DefaultContainer = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+`
+
+const NavContainer = styled(DefaultContainer)`
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 60% 1fr;
+`
+
 const SearchBoxWrapper = styled.div`
   padding: 15px 0;
   display: flex;

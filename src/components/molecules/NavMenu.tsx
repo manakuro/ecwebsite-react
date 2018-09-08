@@ -101,4 +101,5 @@ const NavMenuListItemLink = styled.a`
   color: #2f2f2f;
   line-height: 1.5;
   font-weight: 600;
+  letter-spacing: 0.05em;
 `

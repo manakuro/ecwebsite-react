@@ -20,10 +20,21 @@
     "semicolon": [true, "never"],
     "interface-over-type-literal": false,
     "jsx-no-lambda": false,
+    "jsx-alignment": true,
+    "jsx-boolean-value": true,
+    "jsx-curly-spacing": [true, "never"],
+    "jsx-equals-spacing": [true, "never"],
+    "jsx-key": true,
+    "jsx-no-bind": true,
+    "jsx-no-multiline-js": true,
+    "jsx-no-string-ref": true,
+    "jsx-self-close": true,
+    "jsx-wrap-multiline": true,
     "prettier/prettier": [
       "error",
       {
         "singleQuote": true,
+        "trailingComma": "all",
         "semi": false
       }
     ]
