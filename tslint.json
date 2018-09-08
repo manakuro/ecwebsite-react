@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -13,6 +13,8 @@
     "no-empty-interface": false,
     "no-console": false,
     "curly": false,
+    "semicolon": [true, "never"],
+    "quotemark": [true, "single", "jsx-double"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
     "ordered-imports": false,
@@ -26,14 +28,6 @@
     "jsx-key": true,
     "jsx-no-bind": true,
     "jsx-self-close": true,
-    "jsx-wrap-multiline": true,
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "trailingComma": "all",
-        "semi": false
-      }
-    ]
+    "jsx-wrap-multiline": true
   }
 }
