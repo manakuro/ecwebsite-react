@@ -1,5 +1,11 @@
-export interface HomeState {}
+export interface HomeState {
+  test: string
+}
 
-export default function home(state: HomeState = {}) {
+const initialState = {
+  test: '',
+}
+
+export default function home(state: HomeState = initialState) {
   return state
 }

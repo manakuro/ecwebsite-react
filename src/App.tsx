@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { History } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
-import routes from '@/routes/routes'
+import routes from '@/routes/Routes'
 
 interface AppProps {
   history: History
