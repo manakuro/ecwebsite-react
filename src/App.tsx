@@ -1,14 +1,14 @@
 import * as React from 'react'
-import Header from '@/components/organisms/Header'
+import { History } from 'history'
+import { ConnectedRouter } from 'connected-react-router'
+import routes from '@/routes/routes'
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <Header />
-      </div>
-    )
-  }
+interface AppProps {
+  history: History
+}
+
+const App = ({ history }: AppProps) => {
+  return <ConnectedRouter history={history}>{routes}</ConnectedRouter>
 }
 
 export default App
