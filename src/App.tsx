@@ -3,7 +3,7 @@ import { History } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
 import routes from '@/routes/Routes'
 
-interface AppProps {
+export interface AppProps {
   history: History
 }
 
