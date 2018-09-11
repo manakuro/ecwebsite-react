@@ -1,9 +1,15 @@
 import * as React from 'react'
-import { Route, Switch } from 'react-router'
+import { Route } from 'react-router'
 import Home from '@/containers/HomeContainer'
+import DefaultLayout from '@/components/DefaultLayout'
 
-export default (
-  <Switch>
-    <Route path="/" component={Home} />
-  </Switch>
-)
+export default [
+  {
+    // home
+    route: (props: any) => (
+      <DefaultLayout {...props}>
+        <Route path="/" component={Home} />
+      </DefaultLayout>
+    ),
+  },
+]

@@ -1,10 +1,6 @@
-export interface HomeState {
-  test: string
-}
+export interface HomeState {}
 
-const initialState = {
-  test: '',
-}
+const initialState = {}
 
 export default function home(state: HomeState = initialState) {
   return state

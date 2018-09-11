@@ -3,7 +3,7 @@ import Home from '@/components/Home'
 import { Dispatch } from 'redux'
 import { RootState } from '@/modules/reducers'
 import { connect } from 'react-redux'
-import { HomeState } from '@/modules/home'
+import { HomeState } from '@/modules/home/reducer'
 import { RouteComponentProps } from 'react-router'
 
 export class HomeContainer extends React.Component<HomeProps, {}> {
