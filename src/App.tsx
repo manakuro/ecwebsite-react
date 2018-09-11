@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { History } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
-import routes from '@/routes/Routes'
+import routes, { Route } from '@/routes/Routes'
 import { Switch } from 'react-router'
 
 export interface AppProps {
@@ -14,7 +14,7 @@ const App = (props: AppProps) => {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        {routes.map((r: any, i: number) => {
+        {routes.map((r: Route, i: number) => {
           const RouteComponent = r.route
           return <RouteComponent {...props} key={i} />
         })}
