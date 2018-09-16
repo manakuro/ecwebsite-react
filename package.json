@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-cache-inmemory": "^1.2.10",
+    "apollo-cache-persist": "^0.1.1",
+    "apollo-client": "^2.4.2",
+    "apollo-link-batch-http": "^1.2.3",
     "connected-react-router": "^4.4.1",
     "font-awesome": "^4.7.0",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.9.2",
     "history": "^4.7.2",
     "react": "^16.4.2",
+    "react-apollo": "^2.1.11",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
@@ -62,6 +69,7 @@
     }
   },
   "devDependencies": {
+    "@types/graphql": "^14.0.0",
     "@types/history": "^4.7.0",
     "@types/jest": "^23.3.1",
     "@types/node": "^10.5.8",

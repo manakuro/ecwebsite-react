@@ -5,6 +5,7 @@ import { RootState } from '@/modules/reducers'
 import { connect } from 'react-redux'
 import { HomeState } from '@/modules/home/reducer'
 import { RouteComponentProps } from 'react-router'
+import HomeQuery, { allProducts } from '@/graphql/HomeQuery'
 
 export class HomeContainer extends React.Component<HomeProps, {}> {
   constructor(props: HomeProps) {
@@ -12,7 +13,14 @@ export class HomeContainer extends React.Component<HomeProps, {}> {
   }
 
   public render(): JSX.Element {
-    return <Home {...this.props} />
+    return (
+      <HomeQuery query={allProducts} fetchPolicy="cache-and-network">
+        {({ data }) => {
+          const props = { ...this.props, ...data }
+          return <Home {...props} />
+        }}
+      </HomeQuery>
+    )
   }
 }
 
@@ -21,7 +29,8 @@ type HomeDispatchFromProps = {}
 type HomeOwnProps = RouteComponentProps<any>
 export type HomeProps = HomeStateFromProps &
   HomeDispatchFromProps &
-  HomeOwnProps
+  HomeOwnProps &
+  HomeQuery
 
 export function mapDispatchToProps(dispatch: Dispatch<any>) {
   return {}
