@@ -1,11 +1,12 @@
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-interface HomeQuery {
+export type HomeQueryData = {
   allProducts: any[]
 }
+export type HomeQueryVariables = {}
 
-export const allProducts = gql`
+export const homeQuery = gql`
   query {
     allProducts {
       id
@@ -13,5 +14,4 @@ export const allProducts = gql`
   }
 `
 
-class HomeQuery extends Query<HomeQuery, any> {}
-export default HomeQuery
+export default class HomeQuery extends Query<HomeQuery, HomeQueryVariables> {}
